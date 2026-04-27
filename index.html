@@ -185,87 +185,13 @@
             transform: translateY(-2px);
         }
 
-        .vcard-btn svg {
+.vcard-btn svg {
             width: 16px;
             height: 16px;
             fill: var(--accent);
         }
 
         .vcard-btn:hover svg {
-            fill: var(--accent);
-        }
-
-        .share-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-            padding: 0.875rem;
-            background: var(--accent);
-            border: none;
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 0.8rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
-        }
-
-        .share-btn:hover {
-            background: var(--accent-hover);
-        }
-
-        .share-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: var(--text-primary);
-        }
-
-        .share-btn.copied {
-            background: #458a56;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.7rem;
-            color: var(--bg-light);
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--bg-dark);
-            border: 1px solid var(--bg-light);
-            transition: all 0.2s ease;
-        }
-
-        .social-icons a:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .social-icons svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--text-secondary);
-        }
-
-        .social-icons a:hover svg {
             fill: var(--accent);
         }
 
@@ -303,6 +229,41 @@
 
         .share-icon-btn.copied svg {
             fill: #458a56;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icons a, .social-icons button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+            border: 1px solid var(--bg-light);
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover, .social-icons button:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .social-icons svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-secondary);
+        }
+
+        .social-icons a:hover svg, .social-icons button:hover svg {
+            fill: var(--accent);
         }
 
         /* QR Modal */

@@ -1,8 +1,19 @@
-FROM nginx:alpine
-COPY index.html /usr/share/nginx/html/
-COPY face.jpg /usr/share/nginx/html/
-COPY ProFontIIx-subset.woff2 /usr/share/nginx/html/
-COPY favicon.png /usr/share/nginx/html/
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies
+RUN npm init -y && npm install express google-auth-library googleapis cors
+
+# Copy app files
+COPY index.js ./
+COPY index.html ./
+COPY face.jpg ./
+COPY ProFontIIx-subset.woff2 ./
+COPY favicon.png ./
+COPY credentials.json ./
+
+# Expose port
+EXPOSE 3000
+
+CMD ["node", "index.js"]
