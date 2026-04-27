@@ -318,6 +318,84 @@
             fill: #458a56;
         }
 
+        /* QR Modal */
+        .qr-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .qr-modal.show {
+            display: flex;
+        }
+
+        .qr-content {
+            background: var(--bg-medium);
+            border: 1px solid var(--bg-light);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            max-width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .qr-content h3 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-family: 'ProFontIIx', 'IBM Plex Mono', monospace;
+        }
+
+        .qr-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            border: 2px solid var(--bg-light);
+        }
+
+        .qr-url {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-family: 'ProFontIIx', 'IBM Plex Mono', monospace;
+        }
+
+        .qr-close {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .qr-close:hover {
+            background: var(--bg-light);
+        }
+
+        .qr-close svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-secondary);
+        }
+
+        .qr-close:hover svg {
+            fill: var(--text-primary);
+        }
+
         @media (max-width: 480px) {
             .card {
                 padding: 1.5rem;
@@ -407,6 +485,25 @@
                     <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
                 </svg>
             </button>
+            <button class="share-icon-btn" onclick="showQRCode()" aria-label="Show QR Code">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13 2h-2v2h2v-2zm2-2h2v2h-2v-2zm-4 0h2v2h-2v-2zm2 4h2v2h-2v-2zm2 2h2v2h-2v-2zm-4-4h2v2h-2v-2zm2 4h2v2h-2v-2zm2-4h2v2h-2v-2z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- QR Code Modal -->
+        <div class="qr-modal" id="qrModal" onclick="hideQRCode()">
+            <div class="qr-content" onclick="event.stopPropagation()">
+                <button class="qr-close" onclick="hideQRCode()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+                <h3>Scan to Connect</h3>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://card.sumeetsaini.com&bgcolor=1d2021&color=fbf1c7&margin=0" alt="QR Code" class="qr-image">
+                <p class="qr-url">card.sumeetsaini.com</p>
+            </div>
         </div>
 
         
@@ -445,6 +542,16 @@
                     btn.classList.remove('copied');
                 }, 2000);
             });
+        }
+
+        function showQRCode() {
+            document.getElementById('qrModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideQRCode() {
+            document.getElementById('qrModal').classList.remove('show');
+            document.body.style.overflow = '';
         }
     </script>
 </body>
