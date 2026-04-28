@@ -11,7 +11,6 @@ COPY index.html ./
 COPY face.jpg ./
 COPY ProFontIIx-subset.woff2 ./
 COPY favicon.png ./
-COPY credentials.json ./
 
 # Expose port
 EXPOSE 3000
