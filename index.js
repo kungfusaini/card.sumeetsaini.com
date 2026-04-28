@@ -221,6 +221,27 @@ app.post('/api/wallet/create-pass', (req, res) => {
   }
 });
 
+// GET endpoint that auto-redirects to Google Wallet - visit this on your phone!
+app.get('/wallet', (req, res) => {
+  if (!credentials) {
+    return res.send('Wallet credentials not configured');
+  }
+  
+  try {
+    // Create properly signed JWT
+    const jwtToken = createSignedJwt();
+    
+    const addToWalletUrl = `https://pay.google.com/gp/v/save/${jwtToken}`;
+    
+    // Redirect to Google Wallet
+    res.redirect(addToWalletUrl);
+    
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.send('Error: ' + error.message);
+  }
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', wallet: !!credentials });
