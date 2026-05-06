@@ -40,13 +40,12 @@
         body {
             font-family: 'ProFontIIx', 'IBM Plex Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace;
             background: var(--bg-dark);
-            min-height: 100vh;
-            min-height: 100dvh;
+            height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
-            overflow-x: hidden;
+            padding: 0.75rem;
+            overflow: hidden;
             margin: 0;
         }
 
@@ -54,9 +53,11 @@
             background: var(--bg-medium);
             border: 2px solid var(--accent);
             border-radius: 16px;
-            padding: 2.5rem;
+            padding: 1.5rem;
             max-width: min(420px, 90vw);
             width: 100%;
+            flex-shrink: 0;
+            box-sizing: border-box;
         }
 
         
@@ -287,7 +288,7 @@
 
         .qr-content {
             background: var(--bg-medium);
-            border: 2px solid var(--accent);
+            border: 1px solid var(--bg-light);
             border-radius: 16px;
             padding: 2rem;
             text-align: center;
@@ -296,9 +297,9 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
-        .qr-name {
+        .qr-content h3 {
             color: var(--accent);
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
             font-family: 'ProFontIIx', 'IBM Plex Mono', monospace;
@@ -311,17 +312,10 @@
             border: 2px solid var(--bg-light);
         }
 
-        .qr-label {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-top: 1rem;
-            font-family: 'ProFontIIx', 'IBM Plex Mono', monospace;
-        }
-
         .qr-url {
             color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            margin-top: 1rem;
             font-family: 'ProFontIIx', 'IBM Plex Mono', monospace;
         }
 
@@ -450,9 +444,13 @@
         <!-- QR Code Modal -->
         <div class="qr-modal" id="qrModal" onclick="hideQRCode()">
             <div class="qr-content" onclick="event.stopPropagation()">
-                <h3 class="qr-name">Sumeet Saini</h3>
+                <button class="qr-close" onclick="hideQRCode()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+                <h3>Scan to Connect</h3>
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://card.sumeetsaini.com&bgcolor=1d2021&color=fbf1c7&margin=0" alt="QR Code" class="qr-image">
-                <p class="qr-label">Scan to Connect</p>
                 <p class="qr-url">card.sumeetsaini.com</p>
             </div>
         </div>
