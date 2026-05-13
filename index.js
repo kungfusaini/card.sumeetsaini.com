@@ -10,6 +10,29 @@ app.use(express.static(__dirname, {
   extensions: ['html']
 }));
 
+
+// Serve vCard for download
+app.get('/vcard', (req, res) => {
+  const vcard = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'FN:Sumeet Saini',
+    'TITLE:Full Stack Developer & Designer',
+    'ORG:Reliq Digital',
+    'URL:https://sumeetsaini.com',
+    'URL:https://reliq.digital',
+    'URL:https://www.linkedin.com/in/sumeet-saini-com/',
+    'EMAIL:hi@sumeetsaini.com',
+    'END:VCARD'
+  ].join('\r\n');
+
+  res.set({
+    'Content-Type': 'text/vcard; charset=utf-8',
+    'Content-Disposition': 'attachment; filename="Sumeet-Saini.vcf"'
+  });
+  res.send(vcard);
+});
+
 // Any path redirects to root
 app.use((req, res) => {
   if (req.path !== '/') {

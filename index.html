@@ -460,18 +460,20 @@
 
 <script>
         function downloadVCard() {
-            const vCardData = `BEGIN:VCARD
- VERSION:3.0
- FN:Sumeet Saini
- TITLE:Full Stack Developer & Designer
- ORG:Reliq Digital
- URL:https://sumeetsaini.com
- URL:https://reliq.digital
- URL:https://www.linkedin.com/in/sumeet-saini-com/
- EMAIL:hi@sumeetsaini.com
- END:VCARD`;
+            const vCardData = [
+            'BEGIN:VCARD',
+            'VERSION:3.0',
+            'FN:Sumeet Saini',
+            'TITLE:Full Stack Developer & Designer',
+            'ORG:Reliq Digital',
+            'URL:https://sumeetsaini.com',
+            'URL:https://reliq.digital',
+            'URL:https://www.linkedin.com/in/sumeet-saini-com/',
+            'EMAIL:hi@sumeetsaini.com',
+            'END:VCARD'
+          ].join('\n');
 
-            const blob = new Blob([vCardData], { type: 'text/vcard' });
+            const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -480,6 +482,13 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+
+            // iOS fallback: navigate to server endpoint
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+              setTimeout(function() {
+                window.location.href = '/vcard';
+              }, 800);
+            }
         }
 
         function copyLink() {
